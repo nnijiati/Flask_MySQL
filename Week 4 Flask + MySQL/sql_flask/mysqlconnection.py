@@ -1,7 +1,8 @@
 """ import the necessary modules """
+import pymysql
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
-import MySQLdb
+
 # Create a class that will give us an object that we can use to connect to a database
 class MySQLConnection(object):
     def __init__(self, app, db):
@@ -9,15 +10,19 @@ class MySQLConnection(object):
                 'host': 'localhost',
                 'database': db, # we got db as an argument
                 'user': 'root',
-                'password': 'root',
-                'port': '3306' # change the port to match the port your SQL server is running on
+                'password': 'Nadiya88',
+                'port': '3306', # change the port to match the port your SQL server is running on
+                # 'auth_plugin': 'mysql_native_password',
+                # 'default_authentication_plugin' : 'caching_sha2_password',
+
         }
         # this will use the above values to generate the path to connect to your sql database
         DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
         app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         # establish the connection to database
-        self.db = MySQLdb(app)
+        pymysql.install_as_MySQLdb()
+        self.db = SQLAlchemy(app)
     # this is the method we will use to query the database
     def query_db(self, query, data=None):
         result = self.db.session.execute(text(query), data)

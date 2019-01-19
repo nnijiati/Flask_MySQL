@@ -9,50 +9,7 @@
 <body>
     <div class= "container">
         <h1>Login or Register</h1>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class=flashes>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        <div class="form-container">
-            <h2>Register</h2>
-            <form action="/users/create" method="post">
-
-                <label for="first_name">First Name</label>
-                <input type="text" name="first_name" placeholder="Nadia"> 
-
-                <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" placeholder="Nijat"> 
-
-                <label for="email">Email</label>
-                <input type="text" name="email" placeholder="123@hotmail.com">
-
-                <label for="password">Password:</label>
-                <input type="text" name="password" placeholder="12345678">
-
-                <label for="confirm">Confirm Password:</label>
-                <input type="text" name="confirm" placeholder="12345678">
-
-                <input type="submit" value="Register">
-            
-            </form>        
-        </div>  
-        <div class="form-container">
-            <h2>Login</h2> 
-            <form action="/login" method="post"></form>
-
-            <label for="email">Email</label>
-            <input type="text" name="email" placeholder="123@hotmail.com">
-
-            <label for="password">Password:</label>
-            <input type="text" name="password" placeholder="12345678">
-
-            <input type="submit" value="Register">
-        </div>          
+     
     </div>
     
 </body>
