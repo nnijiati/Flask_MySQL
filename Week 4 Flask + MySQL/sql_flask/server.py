@@ -22,9 +22,9 @@ def index():
 def go_to_dashboard():
         return render_template("dashboard.html")
 
-# @app.route('/users/new')
-# def new_user():
-#     return render_template("new_user.html")
+@app.route('/users/new')
+def new_user():
+    return render_template("new_user.html")
 
 @app.route('/users/create', methods=['POST'])
 def create():
@@ -48,7 +48,8 @@ def create():
         for error in errors:
             flash(error)
         return redirect('/users/new')
-    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    # pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    pw_hash = "jdsofdnewofin"
     print(pw_hash)
 
     print ("YAYY LOGGED IN")
@@ -56,32 +57,25 @@ def create():
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'email': request.form['email'],
-        'pw_hash': pw_hash
+        'pw_hash': pw_hash,
+        'updated_at': datetime.now()
         }
     
-    query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES ('hello', '111', 'mjmm@hotmail.com', '9999', now());"
+    # query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES ('hello', '111', 'mjmm@hotmail.com', '9999', now());"
     # query = 'SELECT * FROM  locations;'
-    # query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(pw_hash)s, NOW());"
-    # query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES(data['first_name'], data['last_name'], data['email'], data['pw_hash'], datetime.now());"
-   
+    # query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES (%s);" % (data['first_name'], data['last_name'], data['email'], data['pw_hash'], "2019-01-19 17:19:12")
+    columns = ', '.join("`" + str(x).replace('/', '_') + "`" for x in data.keys())
+    values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in data.values())
+    query = "INSERT INTO %s (%s) VALUES (%s);" % ("USERS", columns, values)
+    # USERS (first_name, last_name, email, pw_hash, updated_at) VALUES (%%(first_name)s, %%(last_name)s, %%(email)s, %%(pw_hash)s, now());"
  
     user_id = db.query_db(query)
     session['user_id'] = user_id
 
-    # print("**************")
+    print("**************")
     print (user_id)
 
     return redirect('/')
-    # db = MySQLConnector(app, 'mydb_janurary')
-    # query1 = 'SELECT * FROM  users;'
-    # query = 'INSERT INTO USERS (first_name) VALUES (%(first_name)s);'
-
-
-    # user_id = db.query_db(query, data)
-    # session['user_id'] = user_id
-
-
-    # print (user_id)
 # @app.route('/login', methods=['POST'])
 # def login():
 #     pass
