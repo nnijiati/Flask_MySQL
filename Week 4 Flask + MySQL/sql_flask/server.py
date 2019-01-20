@@ -48,8 +48,8 @@ def create():
         for error in errors:
             flash(error)
         return redirect('/users/new')
-    # pw_hash = bcrypt.generate_password_hash(request.form['password'])
-    pw_hash = "jdsofdnewofin"
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    # pw_hash = "jdsofdnewofin"
     print(pw_hash)
 
     print ("YAYY LOGGED IN")
@@ -61,11 +61,13 @@ def create():
         'updated_at': datetime.now()
         }
     
-    # query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES ('hello', '111', 'mjmm@hotmail.com', '9999', now());"
+    # query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES (" + data['first_name'], data['last_name'], data['email'], data['pw_hash'], "2019-01-19 17:19:12"
     # query = 'SELECT * FROM  locations;'
     # query = "INSERT INTO USERS (first_name, last_name, email, pw_hash, updated_at) VALUES (%s);" % (data['first_name'], data['last_name'], data['email'], data['pw_hash'], "2019-01-19 17:19:12")
     columns = ', '.join("`" + str(x).replace('/', '_') + "`" for x in data.keys())
-    values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in data.values())
+    # values = ', '.join("'" + str(x).replace('/', '_') + "'" for x in data.values())
+    values = ''.join(str(x) for x in data.values())
+    # values = data.values()
     query = "INSERT INTO %s (%s) VALUES (%s);" % ("USERS", columns, values)
     # USERS (first_name, last_name, email, pw_hash, updated_at) VALUES (%%(first_name)s, %%(last_name)s, %%(email)s, %%(pw_hash)s, now());"
  
