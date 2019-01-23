@@ -3,7 +3,7 @@ from flask_bcrypt import Bcrypt
 from mysqlconnection import MySQLConnector
 import re
 from datetime import datetime
-from helpers import users
+from helpers import users, locations
 
 
 app = Flask(__name__)
@@ -16,7 +16,11 @@ db = MySQLConnector(app, 'mydb_janurary')
 def index():
     if 'user_id' not in session:
         return redirect('/users/new')
+    # user = users.get_current_user(session['user_id'])
     return render_template("index.html")
+    # user=users.get_current_user(session['user_id']), 
+    # locations = locations.get_all_locations()),
+    # activities = actitivies.get_all_for_current_user(session['user_id'])
 
 @app.route('/dashboard')
 def go_to_dashboard():
@@ -41,7 +45,26 @@ def create():
 
 @app.route('/login', methods=['POST'])
 def login():
-    users.login(request.form, bcrypt)
+    response = users.check_login(request.form, bcrypt)
+    if response:
+        session['user_id'] = response
+        return redirect('/dashboard')
+    else:
+        for error in response:
+            flash(error)
+        return redirect('index.html')
+    print("**************")
+
+
+    # valid, response = users.check_login(request.form, bcrypt)
+    # if valid:
+    #     session['user_id'] = response
+    #     return redirect('/')
+    # else:
+    #     for error in response:
+    #         flash(error)
+    #     return redirect('index.html')
+    # print("**************")
     # return redirect("/users/new")
 
 if __name__ == "__main__":

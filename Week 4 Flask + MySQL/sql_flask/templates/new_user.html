@@ -21,7 +21,6 @@
         <div class="form-container">
             <h2>Register</h2>
             <form action="/users/create" method="post">
-
                 <label for="first_name">First Name</label>
                 <input type="text" name="first_name" placeholder="Nadia"> 
 
@@ -37,22 +36,20 @@
                 <label for="confirm">Confirm Password:</label>
                 <input type="text" name="confirm" placeholder="12345678">
 
-                <input type="submit" value="Register">
-            
+                <input type="submit" value="Register">           
             </form>        
         </div>  
+
         <div class="form-container">
-            <h2>Login</h2> 
-            <form action="/login" method="post"></form>
+            <h3>Login</h3> 
+            <form action="/login" method="post">
+                <label for="email">Email</label>
+                <input type="text" name="email">
+                <label for="password">Password:</label>
+                <input type="text" name="password">
 
-            <label for="email">Email</label>
-            <input type="text" name="email" placeholder="123@hotmail.com">
-
-            <label for="password">Password:</label>
-            <input type="text" name="password" placeholder="12345678">
-
-            <input type="submit" value="Register">
-
+                <input type="submit" value="Login">
+           </form>
         </div>          
     </div>    
 </body>

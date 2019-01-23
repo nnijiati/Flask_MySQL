@@ -4,12 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome to my Page</title>
+    <title>Index Page Ninja Gold</title>
 </head>
 <body>
     <div class= "container">
-        <h1>Hello</h1>
+        <!-- {{ locations }}
+        {{ activities }} -->
+        <h1>Hello Users. This is Index Page, Please Sign in. </h1>
+
+        <!-- </div> --> 
+
+        <!-- <div class="locations">
+            {% for location in locations %}
+                <div class="location">
+                    <form action="/process" method="post">
+                    <h4>{{ location['name'] }}</h4>
+                    <p>Earns {{ location['min_gold'] }}-{{ location['max_gold'] }} Gold </p>
+                    <input type="hidden" name="location" value="{{ location['id'] }}">
+                    <input type="submit" value="Vist {{ location['name'] }}">                
+                    </form>
+                </div>
+            {% endfor %}
+        </div> -->
      
+        <!-- <div class="actitivies">
+            {% for activity in activities %}
+                <p class="green">You earned 15 golds at the Farm</p>
+            {% endfor %}
+        </div> -->
     </div>
     
 </body>

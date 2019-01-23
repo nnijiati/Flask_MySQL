@@ -27,6 +27,7 @@ def validate(form_data):
 
 def create(form_data, bcrypt):
     # pw_hash = bcrypt.generate_password_hash(form_data['password'])
+    print ("88888888888888")
     pw_hash = "jdsofdnewofin"
     db = MySQLConnector(app, 'mydb_janurary')
 
@@ -44,13 +45,41 @@ def create(form_data, bcrypt):
     user_id = db.query_db(query, data)
     return user_id
 
-def login(form_data, bcrypt):
+def check_login(form_data, bcrypt):
+    errors = []
+    print ("88888888888888")
     db = MySQLConnector(app, 'mydb_janurary')
-
+    query = "SELECT email, pw_hash, id FROM users WHERE email = 'murad@hotmail.com';"
     data = {
         "email": request.form["email"]
     }
-    query = "SELECT email, pw_hash, id FROM users WHERE email = 'bjbibijbi@hotmail.com';"
-
-    print ("88888888888888")
     print (db.query_db(query, data))
+    user_email = db.query_db(query, data)
+    # if not user_email:
+    if form_data['email'] != user_email:
+        errors.append("You have to login as Muradil")
+    # else:
+    #     user = user_email[0]
+    #     if bcrypt.check_password_hash(user['pw_hash'], form_data['password']):
+    #         # if user is good, log them in
+    #         return(True, user['id'])
+    #     else:
+    #         errors.append("Email or password incorrect")
+
+    else:
+        user = user_email[0]
+        return(True, user['id'])
+    return (False, errors)
+
+def get_current_user(user_id):
+    print ("88888888888888")
+    db = MySQLConnector(app, 'mydb_janurary')
+    query = "SELECT * FROM users where id = 19;"
+
+    data = {
+        "user_id": user_id
+    }
+
+    return db.query_db(query, data)[0]
+
+    
