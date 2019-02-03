@@ -17,9 +17,16 @@ def success(req):
 
 def user_ids(req, u_id):
     context = {
-        'title': 'Colors', 
+        'title': 'User_id', 
         'header': u_id
     }
+    return render(req, "dashboard/colors.html", context)
+
+def colors(req, color):
+    context = {
+        "title": 'Colors',
+        'header': color
+            }
     return render(req, "dashboard/colors.html", context)
 
 def process(req):
@@ -30,3 +37,4 @@ def process(req):
     req.session['location'] = req.POST['location']
     req.session['favorite_language'] = req.POST['favorite_language']
     return redirect('/success')
+
