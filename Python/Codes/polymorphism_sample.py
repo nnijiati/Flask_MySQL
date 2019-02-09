@@ -50,3 +50,4 @@ print (person_1.pay_bill())
 # This pattern is useful when you know that each subclass of a parent class must define a
 # specific behavior in a method, and you don't want to define a default behavior
 # in the parent class (hence the pure virtual implementation in the parent).
+

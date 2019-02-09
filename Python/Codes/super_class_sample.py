@@ -22,3 +22,4 @@ class Samurai(Human):
         self.strength = 10               # every Samurai starts off with 10 strength
     def sacrifice(self):
         self.health -= 5
+

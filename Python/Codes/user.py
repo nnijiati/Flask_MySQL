@@ -23,3 +23,5 @@ class User(object):
 
 user = User("nadiya", "nadia831@live.com")
 print(user.name)
+
+
